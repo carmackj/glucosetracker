@@ -31,4 +31,3 @@ public class SecondActivity extends AppCompatActivity {
 
     }
 }
-// u r bad coder
