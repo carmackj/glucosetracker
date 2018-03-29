@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "267885943512-p443hpf2llbof194oorsktepu107nc5a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mentorsschool.logindemoapp",
+            "certificate_hash": "f707bb6161fee20dc92b2254197d77e3dfb3779e"
+          }
+        },
+        {
           "client_id": "267885943512-iosgctsbnao1q4kb19o91hc2njpbu8i8.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "267885943512-iosgctsbnao1q4kb19o91hc2njpbu8i8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

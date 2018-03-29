@@ -14,12 +14,8 @@ public class LogGlucoseActivity extends AppCompatActivity {
     private Button logout;
     private Button submit;
 
-    var user = firebase.auth().currentUser;
-    var name, uid;
-    if(user != null) {
-        name = user.displayName;
-        uid = user.uid;
-    }
+    //final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    //DatabaseReference ref = database.getReference("logs");
 
 
     @Override
@@ -33,9 +29,10 @@ public class LogGlucoseActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                DatabaseReference logRef = ref.child("logs");
-                DatabaseReference newLogRef = logRef.push();
-
+                //var user = firebase.auth().currentUser;
+                //DatabaseReference logRef = ref.child("logs");
+                //var level = findViewById(R.id.txtNumber).getSelectedItem();
+                //logRef.push().setValueAsync(new Log((string)user.uid, (string)level));
           }
         });
 
