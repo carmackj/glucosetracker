@@ -12,6 +12,7 @@ public class LogGlucoseActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private Button logout;
+    private Button submit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,16 @@ public class LogGlucoseActivity extends AppCompatActivity {
         setContentView(R.layout.log_glucose);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        submit = findViewById(R.id.btnSubmit);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+
+          }
+        });
+
+
         logout = (Button)findViewById(R.id.btnLogout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,6 +39,8 @@ public class LogGlucoseActivity extends AppCompatActivity {
                 startActivity(new Intent(LogGlucoseActivity.this, MainActivity.class));
             }
         });
+
+
 
     }
 }
