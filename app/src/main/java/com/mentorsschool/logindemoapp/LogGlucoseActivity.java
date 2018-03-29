@@ -46,7 +46,7 @@ public class LogGlucoseActivity extends AppCompatActivity {
             public void onClick(View view) {
                 firebaseAuth.signOut();
                 finish();
-                startActivity(new Intent(LogGlucoseActivity.this, MainActivity.class));
+                startActivity(new Intent(LogGlucoseActivity.this, LoginActivity.class));
             }
         });
 
