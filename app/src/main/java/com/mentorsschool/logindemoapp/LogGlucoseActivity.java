@@ -5,8 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.*;
+import com.google.firebase.database.*;
 
 public class LogGlucoseActivity extends AppCompatActivity {
 
@@ -14,7 +16,7 @@ public class LogGlucoseActivity extends AppCompatActivity {
     private Button logout;
     private Button submit;
 
-    //final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    //FirebaseDatabase database = FirebaseDatabase.getInstance();
     //DatabaseReference ref = database.getReference("logs");
 
 
@@ -29,10 +31,14 @@ public class LogGlucoseActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                //var user = firebase.auth().currentUser;
                 //DatabaseReference logRef = ref.child("logs");
-                //var level = findViewById(R.id.txtNumber).getSelectedItem();
-                //logRef.push().setValueAsync(new Log((string)user.uid, (string)level));
+                //EditText levelBox = findViewById(R.id.txtNumber);
+                //logRef.push().setValueAsync(new Log(levelBox.getText()));
+
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("message");
+
+                myRef.setValue("Hello, World!");
           }
         });
 
