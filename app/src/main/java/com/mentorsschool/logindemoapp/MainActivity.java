@@ -1,6 +1,5 @@
 package com.mentorsschool.logindemoapp;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         if(user != null)
         {
             finish();
-            startActivity(new Intent(MainActivity.this, SecondActivity.class));
+            startActivity(new Intent(MainActivity.this, LogGlucoseActivity.class));
         }
 
         Login.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     progressDialog.dismiss();
                     Toast.makeText(MainActivity.this, "Login complete", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity.this, SecondActivity.class ));
+                    startActivity(new Intent(MainActivity.this, LogGlucoseActivity.class ));
                 }
                 else
                 {

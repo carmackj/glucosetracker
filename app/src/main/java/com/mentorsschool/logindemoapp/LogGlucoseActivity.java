@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class SecondActivity extends AppCompatActivity {
+public class LogGlucoseActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private Button logout;
@@ -16,7 +16,7 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
+        setContentView(R.layout.log_glucose);
 
         firebaseAuth = FirebaseAuth.getInstance();
         logout = (Button)findViewById(R.id.btnLogout);
@@ -25,7 +25,7 @@ public class SecondActivity extends AppCompatActivity {
             public void onClick(View view) {
                 firebaseAuth.signOut();
                 finish();
-                startActivity(new Intent(SecondActivity.this, MainActivity.class));
+                startActivity(new Intent(LogGlucoseActivity.this, MainActivity.class));
             }
         });
 
