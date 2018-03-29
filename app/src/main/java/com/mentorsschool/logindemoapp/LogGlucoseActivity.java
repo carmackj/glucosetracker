@@ -14,6 +14,14 @@ public class LogGlucoseActivity extends AppCompatActivity {
     private Button logout;
     private Button submit;
 
+    var user = firebase.auth().currentUser;
+    var name, uid;
+    if(user != null) {
+        name = user.displayName;
+        uid = user.uid;
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,12 +33,14 @@ public class LogGlucoseActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
+                DatabaseReference logRef = ref.child("logs");
+                DatabaseReference newLogRef = logRef.push();
 
           }
         });
 
 
-        logout = (Button)findViewById(R.id.btnLogout);
+        logout = findViewById(R.id.btnLogout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
