@@ -16,10 +16,6 @@ public class LogGlucoseActivity extends AppCompatActivity {
     private Button logout;
     private Button submit;
 
-    //FirebaseDatabase database = FirebaseDatabase.getInstance();
-    //DatabaseReference ref = database.getReference("logs");
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,14 +27,15 @@ public class LogGlucoseActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                //DatabaseReference logRef = ref.child("logs");
-                //EditText levelBox = findViewById(R.id.txtNumber);
-                //logRef.push().setValueAsync(new Log(levelBox.getText()));
+                EditText levelBox = findViewById(R.id.txtNumber);               //Selects the level box
 
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("message");
+                FirebaseDatabase database = FirebaseDatabase.getInstance();     //Sets up the Database
+                DatabaseReference db = database.getReference("logs");        //Selects the DB reference
 
-                myRef.setValue("Hello, World!");
+                String userId = db.push().getKey();                             //Pushes a new entry to the DB and gets its key
+
+                Log newLog = new Log(levelBox.getText().toString());            //Creates the log
+                db.child(userId).setValue(newLog);                              //Sets the empty entry to the new log
           }
         });
 

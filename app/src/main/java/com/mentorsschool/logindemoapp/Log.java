@@ -8,16 +8,13 @@ public class Log {
     public String strDate;
     public String strTime;
 
-    public Log(String level)
+    public Log()
     {
-        //this.level = level;
+        //Empty Constructor for getValue
+    }
 
-        //DateTimeFormatter dateformat = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        //DateTimeFormatter timeformat = DateTimeFormatter.ofPattern("hh:mm a");
-
-        //LocalDateTime now = LocalDateTime.now();
-
-        //strDate = dateformat.format(now);
-        //strTime = timeformat.format(now);
+    public Log(String level) //Main Constructor
+    {
+        this.level = level;
     }
 }
