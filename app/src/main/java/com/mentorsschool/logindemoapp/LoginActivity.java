@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         if(user != null)
         {
             finish();
-            startActivity(new Intent(LoginActivity.this, LogGlucoseActivity.class));
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
         }
 
         Login.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                 {
                     progressDialog.dismiss();
                     Toast.makeText(LoginActivity.this, "Login complete", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this, LogGlucoseActivity.class ));
+                    startActivity(new Intent(LoginActivity.this, HomeActivity.class ));
                 }
                 else
                 {
