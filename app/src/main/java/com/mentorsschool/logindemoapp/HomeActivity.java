@@ -50,7 +50,7 @@ public class HomeActivity extends AppCompatActivity {
         dbref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                logs.clear();
+                //logs.clear();
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Log log = postSnapshot.getValue(Log.class);
                     logs.add(log);
