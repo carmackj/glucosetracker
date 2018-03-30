@@ -13,6 +13,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import android.view.View;
+import android.widget.ListView;
+
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -23,6 +27,10 @@ public class HomeActivity extends AppCompatActivity {
     private Button newLog;
 
     private TextView nameText;
+
+    List<Log> logs;
+
+    ListView listViewLogs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +46,24 @@ public class HomeActivity extends AppCompatActivity {
 
 
         //Fill List
+        //https://www.simplifiedcoding.net/firebase-realtime-database-crud/#Firebase-Realtime-Database-Basics
+        dbref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                logs.clear();
+                for(DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Log log = postSnapshot.getValue(Log.class);
+                    logs.add(log);
+                }
+                LogsList logsAdapter = new LogsList(HomeActivity.this, logs);
+                listViewLogs.setAdapter(logsAdapter);
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
 
         //End Fill List
 

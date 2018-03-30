@@ -4,16 +4,16 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="Log"
+        android:text="Value"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        android:id="@+id/textViewLog"
+        android:id="@+id/textLog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <TextView
-        android:text="Date"
+        android:text="NULL DATE"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-        android:id="@+id/textViewDate"
+        android:id="@+id/textDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
