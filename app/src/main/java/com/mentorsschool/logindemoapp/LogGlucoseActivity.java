@@ -36,6 +36,7 @@ public class LogGlucoseActivity extends AppCompatActivity {
 
                 Log newLog = new Log(levelBox.getText().toString());            //Creates the log
                 db.child(userId).setValue(newLog);                              //Sets the empty entry to the new log
+                startActivity(new Intent(LogGlucoseActivity.this, HomeActivity.class));
           }
         });
 
