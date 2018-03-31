@@ -5,13 +5,8 @@ import java.time.LocalDateTime;
 public class Log {
     //public String uid;
     public String level;
-    public String strDate;
-    public String strTime;
-
-    public Log()
-    {
-        //Empty Constructor for getValue
-    }
+    //public String strDate;
+    //public String strTime;
 
     public Log(String level) //Main Constructor
     {
