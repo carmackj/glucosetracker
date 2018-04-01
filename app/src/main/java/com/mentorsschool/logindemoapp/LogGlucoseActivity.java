@@ -10,6 +10,8 @@ import android.widget.EditText;
 import com.google.firebase.auth.*;
 import com.google.firebase.database.*;
 
+import java.io.Console;
+
 public class LogGlucoseActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
@@ -34,8 +36,11 @@ public class LogGlucoseActivity extends AppCompatActivity {
 
                 String userId = db.push().getKey();                             //Pushes a new entry to the DB and gets its key
 
+                System.out.print(levelBox.getText().toString());
+
                 Log newLog = new Log(levelBox.getText().toString());            //Creates the log
                 db.child(userId).setValue(newLog);                              //Sets the empty entry to the new log
+                finish();
                 startActivity(new Intent(LogGlucoseActivity.this, HomeActivity.class));
           }
         });
