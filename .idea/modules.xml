@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/glucosetracker.iml" filepath="$PROJECT_DIR$/glucosetracker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/loginDemo.iml" filepath="$PROJECT_DIR$/loginDemo.iml" />
+      <module fileurl="file://C:\Users\joshu\AndroidStudioProjects\glucosetracker\loginDemo.iml" filepath="C:\Users\joshu\AndroidStudioProjects\glucosetracker\loginDemo.iml" />
     </modules>
   </component>
 </project>

@@ -34,9 +34,11 @@ public class LogGlucoseActivity extends AppCompatActivity {
 
                 String userId = db.push().getKey();                             //Pushes a new entry to the DB and gets its key
 
-                Log newLog = new Log(levelBox.getText().toString());            //Creates the log
+                Log newLog = new Log(levelBox.getText().toString(), firebaseAuth.getCurrentUser().getEmail().toString());            //Creates the log
                 db.child(userId).setValue(newLog);                              //Sets the empty entry to the new log
-          }
+
+                startActivity(new Intent(LogGlucoseActivity.this, ViewLog.class));
+            }
         });
 
 
