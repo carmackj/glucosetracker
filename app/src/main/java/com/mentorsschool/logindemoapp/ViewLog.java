@@ -51,7 +51,6 @@ public class ViewLog extends AppCompatActivity {
 
         box.setText("Blank");
 
-
         Query mQueryRef = mDatabase;
 
 
