@@ -1,13 +1,21 @@
 package com.mentorsschool.logindemoapp;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,8 +24,19 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.lang.reflect.Array;
+import java.time.DayOfWeek;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -27,6 +46,11 @@ public class RegistrationActivity extends AppCompatActivity {
     private TextView userLogin;
     private FirebaseAuth firebaseAuth;
     private String user_type;
+    private Spinner dropdown;
+    List<String> names;
+    String[] nameArray;
+
+    private DatabaseReference users, doctors;
 
 
     @Override
@@ -36,6 +60,43 @@ public class RegistrationActivity extends AppCompatActivity {
         setupUIViews();
 
         firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();     //Sets up the Database
+        users = database.getReference("users");
+        doctors = database.getReference("doctors");
+        Query mQueryRef = doctors;
+
+        dropdown = findViewById(R.id.drSpinner);
+        names = new ArrayList<>();
+        names.add("Steve");
+        names.add("Tom");
+
+        doctors.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot2) {
+                ArrayList<Doctor> drList = new ArrayList<>();
+
+                for(DataSnapshot ds : dataSnapshot2.getChildren()){
+                    //Doctor dr = ds.getValue(Doctor.class);
+                    //drList.add(dr);
+                    Doctor dr = ds.getValue(Doctor.class);
+                    String name = dr.name;
+                    names.add(name);
+                }
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                        RegistrationActivity.this,
+                        android.R.layout.simple_spinner_item,
+                        names
+                );
+
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                dropdown.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
         regButton.setOnClickListener(new View.OnClickListener() {
@@ -55,10 +116,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             {
                                 Toast.makeText(RegistrationActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
 
-                                FirebaseDatabase database = FirebaseDatabase.getInstance();     //Sets up the Database
-                                //DatabaseReference users = database.getReference("users").child(firebaseAuth.getCurrentUser().getUid());
-                                DatabaseReference users = database.getReference("users");
-                                DatabaseReference doctors = database.getReference("doctors");
+
 
                                 String user_name = userName.getText().toString().trim();
                                 int user_lowLevel = Integer.parseInt(lowLevel.getText().toString().trim());

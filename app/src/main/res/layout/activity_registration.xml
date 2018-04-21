@@ -40,7 +40,7 @@
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etUserName"
-        app:layout_constraintVertical_bias="0.057" />
+        app:layout_constraintVertical_bias="0.013" />
 
     <EditText
         android:id="@+id/etUserPassword"
@@ -58,7 +58,7 @@
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etUserEmail"
-        app:layout_constraintVertical_bias="0.114" />
+        app:layout_constraintVertical_bias="0.021" />
 
     <Button
         android:id="@+id/btnRegister"
@@ -71,71 +71,89 @@
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etUserPassword"
-        app:layout_constraintVertical_bias="0.63" />
+        app:layout_constraintVertical_bias="0.884" />
 
     <TextView
         android:id="@+id/tvUserLogin"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_height="30dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Already Signed up? Login"
+        android:textAlignment="center"
         android:textSize="22dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Switch
         android:id="@+id/swType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="90dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="151dp"
         android:layout_marginStart="151dp"
         android:layout_marginTop="26dp"
         android:text="Doctor"
         android:textOff="Patient"
         android:textOn="Doctor"
-        app:layout_constraintBottom_toTopOf="@+id/btnRegister"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etUserPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/etUserPassword"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/txtLowLevel"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="19dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginTop="25dp"
         android:ems="10"
         android:hint="Low"
         android:inputType="number"
         android:text="70"
-        app:layout_constraintBottom_toTopOf="@+id/btnRegister"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/txtHighLevel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/swType"
+        app:layout_constraintVertical_bias="0.0"
         tools:text="70" />
 
     <EditText
         android:id="@+id/txtHighLevel"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="19dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginTop="25dp"
         android:ems="10"
         android:hint="High"
         android:inputType="number"
         android:text="150"
-        app:layout_constraintBottom_toTopOf="@+id/btnRegister"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txtLowLevel"
         app:layout_constraintTop_toBottomOf="@+id/swType"
         app:layout_constraintVertical_bias="0.0"
         tools:text="150" />
+
+    <Spinner
+        android:id="@+id/drSpinner"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="344dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 </android.support.constraint.ConstraintLayout>
