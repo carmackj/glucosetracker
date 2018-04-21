@@ -2,42 +2,47 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/txtLogs"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mentorsschool.logindemoapp.ViewLog_Text">
+    tools:context="com.mentorsschool.logindemoapp.ViewLog_Graph">
 
-    <TextView
-        android:id="@+id/txtLogView"
-        android:layout_width="352dp"
-        android:layout_height="443dp"
-        android:layout_marginTop="20dp"
-        android:text="TextView"
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graph"
+        android:layout_width="match_parent"
+        android:layout_height="323dp"
+        android:layout_marginBottom="82dp"
+        android:layout_marginTop="229dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnGoToGraph" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.804" />
 
     <Button
-        android:id="@+id/btnGoToGraph"
+        android:id="@+id/btnGoToText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="299dp"
-        android:text="Graph"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="296dp"
+        android:text="Text"
+        app:layout_constraintBottom_toTopOf="@+id/graph"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/btnGoToHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="209dp"
+        android:layout_marginBottom="181dp"
+        android:layout_marginEnd="208dp"
         android:text="Home"
-        app:layout_constraintBottom_toTopOf="@+id/txtLogView"
-        app:layout_constraintEnd_toStartOf="@+id/btnGoToGraph"
+        app:layout_constraintBottom_toTopOf="@+id/graph"
+        app:layout_constraintEnd_toStartOf="@+id/btnGoToText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

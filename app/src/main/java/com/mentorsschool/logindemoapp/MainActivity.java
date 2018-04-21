@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         if(user != null)
         {
             finish();
-            startActivity(new Intent(MainActivity.this, LogGlucoseActivity.class));
+            startActivity(new Intent(MainActivity.this, Home.class));
         }
 
         Login.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void validate(String userName, String userPassword)
     {
-        progressDialog.setMessage("You can dance until its time");
+        progressDialog.setMessage("You can dance until it's time");
         progressDialog.show();
         firebaseAuth.signInWithEmailAndPassword(userName, userPassword) .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override

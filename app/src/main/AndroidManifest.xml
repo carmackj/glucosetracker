@@ -18,7 +18,9 @@
         </activity>
         <activity android:name=".LogGlucoseActivity" />
         <activity android:name=".RegistrationActivity" />
-        <activity android:name=".ViewLog"></activity>
+        <activity android:name=".ViewLog_Text" />
+        <activity android:name=".Home" />
+        <activity android:name=".ViewLog_Graph"></activity>
     </application>
 
 </manifest>
