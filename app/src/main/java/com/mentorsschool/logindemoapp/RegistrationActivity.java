@@ -28,6 +28,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Logger;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
@@ -55,6 +56,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        FirebaseDatabase.getInstance().setLogLevel(Logger.Level.DEBUG);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         setupUIViews();
@@ -67,21 +71,17 @@ public class RegistrationActivity extends AppCompatActivity {
 
         dropdown = findViewById(R.id.drSpinner);
         names = new ArrayList<>();
-        names.add("Steve");
-        names.add("Tom");
+        names.add("");
 
-        doctors.addListenerForSingleValueEvent(new ValueEventListener() {
+
+        doctors.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot2) {
-                ArrayList<Doctor> drList = new ArrayList<>();
-
-                for(DataSnapshot ds : dataSnapshot2.getChildren()){
-                    //Doctor dr = ds.getValue(Doctor.class);
-                    //drList.add(dr);
-                    Doctor dr = ds.getValue(Doctor.class);
-                    String name = dr.name;
-                    names.add(name);
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds: dataSnapshot.getChildren()) {
+                    String drName = ds.child("name").getValue(String.class);
+                    names.add(drName);
                 }
+
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(
                         RegistrationActivity.this,
                         android.R.layout.simple_spinner_item,
@@ -90,6 +90,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 dropdown.setAdapter(adapter);
+
             }
 
             @Override
@@ -97,6 +98,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
             }
         });
+
 
 
         regButton.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +131,9 @@ public class RegistrationActivity extends AppCompatActivity {
                                 else
                                     user_type="Patient";
 
-                                users.child(firebaseAuth.getCurrentUser().getUid()).setValue(new User(user_name, user_type, user_lowLevel, user_highLevel));
+                                String doctor = dropdown.getSelectedItem().toString();
+
+                                users.child(firebaseAuth.getCurrentUser().getUid()).setValue(new User(user_name, user_type, user_lowLevel, user_highLevel, doctor));
 
                                 startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
                             }

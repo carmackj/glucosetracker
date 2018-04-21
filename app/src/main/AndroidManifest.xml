@@ -20,7 +20,8 @@
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".ViewLog_Text" />
         <activity android:name=".Home" />
-        <activity android:name=".ViewLog_Graph"></activity>
+        <activity android:name=".ViewLog_Graph" />
+        <activity android:name=".ViewPatients"></activity>
     </application>
 
 </manifest>

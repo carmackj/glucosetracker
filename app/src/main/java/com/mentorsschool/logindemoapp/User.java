@@ -10,17 +10,19 @@ public class User {
     public String type;
     public int lowLevel;
     public int highLevel;
+    public String doctor;
 
     public User ()
     {
 
     }
 
-    public User (String name, String type, int lowLevel, int highLevel)
+    public User (String name, String type, int lowLevel, int highLevel, String doctor)
     {
         this.name = name;
         this.type = type;
         this.lowLevel = lowLevel;
         this.highLevel = highLevel;
+        this.doctor = doctor;
     }
 }
