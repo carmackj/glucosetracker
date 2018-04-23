@@ -8,6 +8,7 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,47 +33,50 @@ public class ViewPatients extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private DatabaseReference mUsers;
     private FirebaseAuth firebaseAuth;
+    private DatabaseReference mDB;
     Query mQueryRef;
 
     private TextView box;
+
+    private Bundle b;
+    private String drName = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_patients);
 
+        b = getIntent().getExtras();
+        if(b != null)
+            drName = b.getString("dr");
+
         mDatabase = FirebaseDatabase.getInstance().getReference("logs");
         mUsers = FirebaseDatabase.getInstance().getReference("users");
+        mDB = FirebaseDatabase.getInstance().getReference();
+        firebaseAuth = FirebaseAuth.getInstance();
 
         box = findViewById(R.id.txtBox);
         box.setText("");
 
         mQueryRef = mUsers;
 
-        mQueryRef.orderByKey()
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        ArrayList<User> userList = new ArrayList<>();
 
-                        for(DataSnapshot ds : dataSnapshot.getChildren()){
-                            User user = ds.getValue(User.class);
-                            userList.add(user);
-                        }
+        mQueryRef.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot2) {
 
-                        Iterator<User> it2 = userList.iterator();
-                        while(it2.hasNext())
-                        {
-                            User currentUser = it2.next();
-
-                            box.append(currentUser.name+"\n");
-                        }
+                for(DataSnapshot ds : dataSnapshot2.getChildren()){
+                    User user = ds.getValue(User.class);
+                    if(user.doctor.equals(drName)) {
+                        box.append(user.name + "\n");
                     }
+                }
+            }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-                    }
-                });
+            }
+        });
     }
 }

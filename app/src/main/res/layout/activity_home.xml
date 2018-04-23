@@ -15,7 +15,6 @@
         android:layout_marginEnd="21dp"
         android:layout_marginStart="21dp"
         android:layout_marginTop="83dp"
-        android:text="Joshua Carmack"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/btnGoToAddLog"
         app:layout_constraintEnd_toEndOf="parent"

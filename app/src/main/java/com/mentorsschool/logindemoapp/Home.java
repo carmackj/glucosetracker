@@ -35,11 +35,14 @@ public class Home extends AppCompatActivity {
 
     private User u;
 
+    private Bundle b;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        b = new Bundle();
 
         firebaseAuth = FirebaseAuth.getInstance();
         mUser = FirebaseDatabase.getInstance().getReference("users").child(firebaseAuth.getCurrentUser().getUid());
@@ -48,20 +51,34 @@ public class Home extends AppCompatActivity {
 
         viewPts = findViewById(R.id.btnViewPts);
 
-        /*
-        mDB.addValueEventListener(new ValueEventListener() {
-           @Override
-           public void onDataChange(DataSnapshot dataSnapshot) {
-               userType = dataSnapshot.child("users").child(user.getUid().toString()).child("type").getValue(String.class);
-           }
+        mDB.child("users").child(firebaseAuth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                u = dataSnapshot.getValue(User.class);
 
-           @Override
-           public void onCancelled(DatabaseError databaseError) {
+                name = findViewById(R.id.txtName);
+                name.setText(u.name);
+                name.append("\n");
+                name.append(u.type);
 
-           }
+                if(u.type.equals("Doctor"))
+                {
+                    viewPts.setVisibility(View.VISIBLE);
+                    b.putString("dr", u.name);
+                }
+                else{
+                    viewPts.setVisibility(View.INVISIBLE);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
         });
-        */
 
+        /*
         mDB.child("users").child(firebaseAuth.getCurrentUser().getUid()).child("type").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -85,18 +102,7 @@ public class Home extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
+        */
 
 
         btnAddLog = findViewById(R.id.btnGoToAddLog);
@@ -131,7 +137,10 @@ public class Home extends AppCompatActivity {
         viewPts.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Home.this, ViewPatients.class));
+                Intent intent = new Intent(Home.this, ViewPatients.class);
+                intent.putExtras(b);
+                startActivity(intent);
+                //startActivity(new Intent(Home.this, ViewPatients.class));
             }
         });
     }
