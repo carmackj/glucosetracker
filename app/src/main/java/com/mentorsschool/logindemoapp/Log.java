@@ -13,10 +13,8 @@ import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.*;
 
 public class Log {
-    //public String uid;
     public String level;
     public String email;
-    //public String strTime;
     public String time1;
     public String time2;
     public String timeStr;
@@ -42,15 +40,5 @@ public class Log {
         this.timeStr = dfTime.format(date);
     }
 
-    /*
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("email", email);
-        result.put("level", level);
-        return result;
-    }
-    */
-
     public String getLevel(){ return level;}
-
 }

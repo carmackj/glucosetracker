@@ -41,48 +41,50 @@ import java.util.List;
 
 public class RegistrationActivity extends AppCompatActivity {
 
+    //Creates variables for the edit fields
     private EditText userName, userPassword, userEmail, lowLevel, highLevel;
     private Button regButton;
     private CompoundButton switchType;
     private TextView userLogin;
-    private FirebaseAuth firebaseAuth;
     private String user_type;
     private Spinner dropdown;
-    List<String> names;
-    String[] nameArray;
 
+    List<String> names; //List of doctors
+
+    //Declare Firebase Info
+    private FirebaseAuth firebaseAuth;
     private DatabaseReference users, doctors;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        FirebaseDatabase.getInstance().setLogLevel(Logger.Level.DEBUG);
-
+        //Set up the view
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         setupUIViews();
 
+        //Set up firebase objects
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseDatabase database = FirebaseDatabase.getInstance();     //Sets up the Database
         users = database.getReference("users");
         doctors = database.getReference("doctors");
         Query mQueryRef = doctors;
 
+        //Finds the dropdown
         dropdown = findViewById(R.id.drSpinner);
-        names = new ArrayList<>();
+        names = new ArrayList<>();  //Sets up an ArrayList of doctors
         names.add("");
 
 
-        doctors.addValueEventListener(new ValueEventListener() {
+        doctors.addValueEventListener(new ValueEventListener() {    //Listens for Doctors added to the table
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds: dataSnapshot.getChildren()) {
-                    String drName = ds.child("name").getValue(String.class);
-                    names.add(drName);
+                    String drName = ds.child("name").getValue(String.class);    //Gets the Doctors Name
+                    names.add(drName);  //Adds it to the array list
                 }
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(  //Set the dropdown to the names
                         RegistrationActivity.this,
                         android.R.layout.simple_spinner_item,
                         names
@@ -103,27 +105,26 @@ public class RegistrationActivity extends AppCompatActivity {
 
         regButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) {    //Listen for when the registration button is clicked
                 if (validate()) {
-                    //upload data to the database
-                    //String user_name = userName.getText().toString().trim();
-                    String user_email = userEmail.getText().toString().trim();
-                    String user_password = userPassword.getText().toString().trim();
+                    String user_email = userEmail.getText().toString().trim();          //Gets the user email
+                    String user_password = userPassword.getText().toString().trim();    //Gets the user password
 
 
                     firebaseAuth.createUserWithEmailAndPassword(user_email, user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
+                        public void onComplete(@NonNull Task<AuthResult> task) {    //Create a firebase user
                             if(task.isSuccessful())
                             {
                                 Toast.makeText(RegistrationActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
 
-
-
+                                //Begin making hte user table entry
+                                //Get info from the fields
                                 String user_name = userName.getText().toString().trim();
                                 int user_lowLevel = Integer.parseInt(lowLevel.getText().toString().trim());
                                 int user_highLevel = Integer.parseInt(highLevel.getText().toString().trim());
 
+                                //If the user is a doctor, make a doctor entry and set their type
                                 if(switchType.isChecked()) {
                                     user_type = "Doctor";
                                     doctors.child(firebaseAuth.getCurrentUser().getUid()).setValue(new Doctor(user_name));
@@ -131,11 +132,12 @@ public class RegistrationActivity extends AppCompatActivity {
                                 else
                                     user_type="Patient";
 
-                                String doctor = dropdown.getSelectedItem().toString();
+                                String doctor = dropdown.getSelectedItem().toString();  //Get their doctor if they selected one
 
-                                users.child(firebaseAuth.getCurrentUser().getUid()).setValue(new User(user_name, user_type, user_lowLevel, user_highLevel, doctor));
+                                //Add the user to the table
+                                users.child(firebaseAuth.getCurrentUser().getUid()).setValue(new User(firebaseAuth.getCurrentUser().getUid(),user_name, user_type, user_lowLevel, user_highLevel, doctor));
 
-                                startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
+                                startActivity(new Intent(RegistrationActivity.this, MainActivity.class));   //Go to main screen
                             }
                             else
                             {
@@ -150,7 +152,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         userLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) {    //Listener for if user clicks the login button
                 startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
             }
         });

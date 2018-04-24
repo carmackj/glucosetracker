@@ -6,6 +6,15 @@ package com.mentorsschool.logindemoapp;
 
 public class User {
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String id;
     public String name;
     public String type;
     public int lowLevel;
@@ -65,5 +74,20 @@ public class User {
         this.lowLevel = lowLevel;
         this.highLevel = highLevel;
         this.doctor = doctor;
+    }
+
+    public User (String id, String name, String type, int lowLevel, int highLevel, String doctor)
+    {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.lowLevel = lowLevel;
+        this.highLevel = highLevel;
+        this.doctor = doctor;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }

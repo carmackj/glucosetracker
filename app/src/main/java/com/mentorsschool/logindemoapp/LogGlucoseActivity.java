@@ -14,27 +14,30 @@ import com.google.firebase.database.*;
 
 public class LogGlucoseActivity extends AppCompatActivity {
 
+    //Declares Firebase Instances
     private FirebaseAuth firebaseAuth;
-    private Button logout;
+
+    //Declares inputs from the view
     private Button submit;
     private RadioGroup timeGroup1;
     private RadioGroup timeGroup2;
     private RadioButton radioButton;
+    private Button home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Sets the view and context
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_glucose);
 
-        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();  //Gets the current firebase instance
 
-        Button home = findViewById(R.id.btnHome);
+        home = findViewById(R.id.btnHome);   //sets the home button
         home.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-
+            public void onClick(View view) {    //Sets a click listener on the home button
                 finish();
-                startActivity(new Intent(LogGlucoseActivity.this, Home.class));
+                startActivity(new Intent(LogGlucoseActivity.this, Home.class)); //Go to the home screen if pressed
             }
         });
 
